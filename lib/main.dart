@@ -1,7 +1,6 @@
-import 'package:expense_tracker/user_transactions.dart';
+
 import 'package:flutter/material.dart';
-import 'model/transaction.dart';
-import './user_transactions.dart';
+import './model/transaction.dart';
 import './transaction_list.dart';
 import './new_transactions.dart';
 
@@ -18,16 +17,66 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final List<Transaction> transAction = [
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
+class _MyHomePageState extends State<MyHomePage> {
+  // final List<Transaction> transAction = [
+  //
+  // ];
+
+  final List<Transaction> userTransactions = [
+    Transaction(
+      id: "t1",
+      title: "new shoes",
+      amount: 1500,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: "t2",
+      title: "grocery",
+      amount: 2000,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: "t2",
+      title: "grocery",
+      amount: 2000,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: "t2",
+      title: "grocery",
+      amount: 2000,
+      date: DateTime.now(),
+    ),
   ];
-  //onChanged fires for every keystroke
-  //you can better use controller
 
-  // late String Amount;
-  // late String title;
+  void addNewTransaction(String titletx, double amounttx) {
+    final TxNew = Transaction(id: DateTime.now().toString(),
+        title: titletx,
+        amount: amounttx,
+        date: DateTime.now());
 
+    setState(() {
+      userTransactions.add(TxNew);
+    });
+  }
+
+
+  //onChange d fires for every keystroke
+  void startNewTransaction(BuildContext ctx){
+    showModalBottomSheet(context: ctx, builder: (_){
+
+      return GestureDetector(
+        onTap: (){},
+      child : NewTransaction(addNewTransaction),
+      behavior: HitTestBehavior.opaque,);
+    }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +84,9 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text("Expense Tracker App"),
+        actions: [
+          IconButton(onPressed:()=>startNewTransaction(context), icon: Icon(Icons.add,color: Colors.amberAccent,))
+        ],
       ),
       body: Column(
         children: [
@@ -52,15 +104,18 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.all(10),
-              child: Column(
-                ),
-            ),
-          UserTransactions()
+          // Container(
+          //   width: double.infinity,
+          //   margin: EdgeInsets.all(10),
+          //     child: Column(
+          //       ),
+          //   ),
+          TransactionList(userTransactions)
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(onPressed:()=>startNewTransaction(context),
+      child: Icon(Icons.add),),
     );
   }
 }
