@@ -12,12 +12,12 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 450,
+      //height: MediaQuery.of(context).size.height * 0.6, //gives the screen 60% of height ,
       child: transactions.isEmpty
           ? Column(
               children: <Widget>[
                 Text(
-                  'No transactions added yet!',
+                  'No transactions added yet',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 SizedBox(
@@ -35,20 +35,23 @@ class TransactionList extends StatelessWidget {
               ],
             )
           : ListView.builder(
+              physics: BouncingScrollPhysics(
+              ),
               itemBuilder: (ctx, index) {
                 return Card(
-                  elevation: 5,
+                  elevation: 4,
                   margin: EdgeInsets.symmetric(
                     vertical: 8,
-                    horizontal: 5,
+                    horizontal: 12,
                   ),
                   child: ListTile(
                     leading: CircleAvatar(
-                      radius: 30,
+                      backgroundColor: Theme.of(context).primaryColorDark,
+                      radius: 40,
                       child: Padding(
                         padding: EdgeInsets.all(6),
                         child: FittedBox(
-                          child: Text('\$${transactions[index].amount}'),
+                          child: Text('₹ ${transactions[index].amount}'),
                         ),
                       ),
                     ),

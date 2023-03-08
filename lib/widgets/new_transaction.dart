@@ -64,45 +64,88 @@ class _NewTransactionState extends State<NewTransaction> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            TextField(
-              decoration: InputDecoration(labelText: 'Title'),
-              controller: _titleController,
-              onSubmitted: (_) => _submitData(),
-              // onChanged: (val) {
-              //   titleInput = val;
-              // },
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => _submitData(),
-              // onChanged: (val) => amountInput = val,
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? 'No Date Chosen!'
-                          : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
-                    ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(185, 185, 185, 0.3),
+                    borderRadius: BorderRadius.circular(12)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                  child: TextField(
+                    decoration: InputDecoration(labelText: 'Title' , border: InputBorder.none,),
+                    controller: _titleController,
+                    onSubmitted: (_) => _submitData(),
+                    // onChanged: (val) {
+                    //   titleInput = val;
+                    // },
                   ),
-                  ElevatedButton(
-                    child: Text(
-                      'Choose Date',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,22,0,0),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(185, 185, 185, 0.3),
+                    borderRadius: BorderRadius.circular(12)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                  child: TextField(
+                    decoration: InputDecoration(labelText: 'Amount' , border: InputBorder.none,),
+                    controller: _amountController,
+                    onSubmitted: (_) => _submitData(),
+                    // onChanged: (val) {
+                    //   titleInput = val;
+                    // },
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12,22,12,12),
+              child: Container(
+                height: 70,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? 'No Date Chosen!'
+                            : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
                       ),
                     ),
-                    onPressed: _presentDatePicker,
-                  ),
-                ],
+                    OutlinedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(25))
+                        ),
+                        side: BorderSide(
+                          color: Theme.of(context).primaryColorDark,width: 2
+                        ),
+                        backgroundColor: Theme.of(context).primaryColorLight,
+                        foregroundColor: Theme.of(context).primaryColorDark,
+                      ),
+                      child: Text(
+                        'Choose Date',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: _presentDatePicker,
+                    ),
+                  ],
+                ),
               ),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(25))
+                )
+              ),
               child: Text('Add Transaction'),
               //color: Theme.of(context).primaryColor,
               //textColor: Theme.of(context).textTheme.button.color,

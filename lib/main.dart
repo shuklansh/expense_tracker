@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 import './widgets/new_transaction.dart';
@@ -14,8 +16,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Personal Expenses',
       theme: ThemeData(
+
+        primaryColorDark: Color.fromRGBO(59,44,61,1),
           primarySwatch: Colors.purple,
-          accentColor: Colors.amber,
+          accentColor: Colors.deepPurple,
           // errorColor: Colors.red,
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -24,7 +28,6 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
-                button: TextStyle(color: Colors.white),
               ),
           appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
@@ -53,6 +56,36 @@ class _MyHomePageState extends State<MyHomePage> {
     //   id: 't1',
     //   title: 'New Shoes',
     //   amount: 69.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Weekly Groceries',
+    //   amount: 16.53,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Weekly Groceries',
+    //   amount: 16.53,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Weekly Groceries',
+    //   amount: 16.53,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Weekly Groceries',
+    //   amount: 16.53,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Weekly Groceries',
+    //   amount: 16.53,
     //   date: DateTime.now(),
     // ),
     // Transaction(
@@ -97,15 +130,18 @@ class _MyHomePageState extends State<MyHomePage> {
         return GestureDetector(
           onTap: () {},
           child: Container(
-            padding: EdgeInsets.fromLTRB(12, 12, 12, 0),
             height: 400,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(40),
                 topRight: Radius.circular(40)
               )
             ),
-              child: Center(child: NewTransaction(_addNewTransaction))),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10,10,10,0),
+                child: Center(child: NewTransaction(_addNewTransaction)),
+              )),
           behavior: HitTestBehavior.opaque,
         );
       },
@@ -120,39 +156,70 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-         backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: Text(
-          'Personal Expenses',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Theme.of(context).primaryColorDark,
-          ),
+
+    final appbar = AppBar(
+    backgroundColor: Colors.transparent,
+    elevation: 0.0,
+    centerTitle: true,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+        'Personal',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+        color: Theme.of(context).primaryColorDark,
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _startAddNewTransaction(context),
-          ),
-        ],
-      ),
+        ),
+        Text(" Expenses",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Theme.of(context).primaryColor
+        )),
+      ],
+    ),
+    // actions: <Widget>[
+    // IconButton(
+    // icon: Icon(Icons.add,color: Theme.of(context).primaryColorDark),
+    // onPressed: () => _startAddNewTransaction(context),
+    // ),
+    // ],
+    );
+
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(236, 236, 236, 1),
+      appBar: appbar,
       body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(_recentTransactions),
-            TransactionList(_userTransactions, _deleteTransaction),
+            Container(
+              height: (MediaQuery.of(context).size.height - (appbar.preferredSize.height + MediaQuery.of(context).padding.top)) *0.32 ,
+                child: Chart(_recentTransactions)),
+            Container(
+                height: (MediaQuery.of(context).size.height - (appbar.preferredSize.height+ MediaQuery.of(context).padding.top ) ) *0.68 ,
+                child: TransactionList(_userTransactions, _deleteTransaction)),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
+      floatingActionButton:
+      Container(
+        decoration: BoxDecoration(
+            color: Theme.of(context).primaryColorDark,
+            borderRadius: BorderRadius.all( Radius.circular(40)
+            )
+        ),
+        child: FloatingActionButton.extended(
+          isExtended: true,
+
+          elevation: 0.0,
+          backgroundColor: Theme.of(context).primaryColorDark,
+          icon: Icon(Icons.add),
+          label: Text("Expense"),
+          onPressed: () => _startAddNewTransaction(context),
+        ),
       ),
     );
   }
