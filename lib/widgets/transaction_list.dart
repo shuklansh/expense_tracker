@@ -61,6 +61,9 @@ class TransactionList extends StatelessWidget {
                     ),
                     subtitle: Text(
                       DateFormat.yMMMd().format(transactions[index].date),
+                        style: TextStyle(
+                          color: DateFormat.yMMMd().format(transactions[index].date) == DateFormat.yMMMd().format(DateTime.now()) ? Colors.red : Colors.grey
+                        )
                     ),
                     trailing: IconButton(
                       icon: Icon(Icons.delete),

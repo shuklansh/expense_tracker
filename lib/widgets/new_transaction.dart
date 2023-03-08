@@ -25,7 +25,6 @@ class _NewTransactionState extends State<NewTransaction> {
     if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
-
     widget.addTx(
       enteredTitle,
       enteredAmount,
@@ -39,7 +38,7 @@ class _NewTransactionState extends State<NewTransaction> {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2019),
+      firstDate: DateTime(2023),
       lastDate: DateTime.now(),
     ).then((pickedDate) {
       if (pickedDate == null) {
@@ -64,23 +63,20 @@ class _NewTransactionState extends State<NewTransaction> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(185, 185, 185, 0.3),
-                    borderRadius: BorderRadius.circular(12)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                  child: TextField(
-                    decoration: InputDecoration(labelText: 'Title' , border: InputBorder.none,),
-                    controller: _titleController,
-                    onSubmitted: (_) => _submitData(),
-                    // onChanged: (val) {
-                    //   titleInput = val;
-                    // },
-                  ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(185, 185, 185, 0.3),
+                  borderRadius: BorderRadius.circular(12)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                child: TextField(
+                  decoration: InputDecoration(labelText: 'Title' , border: InputBorder.none,),
+                  controller: _titleController,
+                  onSubmitted: (_) => _submitData(),
+                  // onChanged: (val) {
+                  //   titleInput = val;
+                  // },
                 ),
               ),
             ),

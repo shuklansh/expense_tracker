@@ -52,48 +52,48 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'New Shoes',
-    //   amount: 69.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Weekly Groceries',
-    //   amount: 16.53,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Weekly Groceries',
-    //   amount: 16.53,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Weekly Groceries',
-    //   amount: 16.53,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Weekly Groceries',
-    //   amount: 16.53,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Weekly Groceries',
-    //   amount: 16.53,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Weekly Groceries',
-    //   amount: 16.53,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't1',
+      title: 'New Shoes',
+      amount: 69.99,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
   ];
 
   List<Transaction> get _recentTransactions {
@@ -139,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(10,10,10,0),
+                padding: const EdgeInsets.fromLTRB(10,20,10,0),
                 child: Center(child: NewTransaction(_addNewTransaction)),
               )),
           behavior: HitTestBehavior.opaque,
@@ -189,19 +189,16 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(236, 236, 236, 1),
       appBar: appbar,
-      body: SingleChildScrollView(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              height: (MediaQuery.of(context).size.height - (appbar.preferredSize.height + MediaQuery.of(context).padding.top)) *0.32 ,
-                child: Chart(_recentTransactions)),
-            Container(
-                height: (MediaQuery.of(context).size.height - (appbar.preferredSize.height+ MediaQuery.of(context).padding.top ) ) *0.68 ,
-                child: TransactionList(_userTransactions, _deleteTransaction)),
-          ],
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            height: (MediaQuery.of(context).size.height - (appbar.preferredSize.height + MediaQuery.of(context).padding.top)) *0.32 ,
+              child: Chart(_recentTransactions)),
+          Container(
+              height: (MediaQuery.of(context).size.height - (appbar.preferredSize.height+ MediaQuery.of(context).padding.top ) ) *0.68 ,
+              child: TransactionList(_userTransactions, _deleteTransaction)),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton:
@@ -213,7 +210,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         child: FloatingActionButton.extended(
           isExtended: true,
-
           elevation: 0.0,
           backgroundColor: Theme.of(context).primaryColorDark,
           icon: Icon(Icons.add),
